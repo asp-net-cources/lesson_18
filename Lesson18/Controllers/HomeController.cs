@@ -10,11 +10,11 @@ namespace Lesson18.Controllers;
 
 public class HomeController : Controller
 {
-    public IDataContext _dataContext;
+    public ShopDbContext _dataContext;
 
 
     private readonly ILogger<HomeController> _logger;
-    public HomeController(ILogger<HomeController> logger, IDataContext dataContext)
+    public HomeController(ILogger<HomeController> logger, ShopDbContext dataContext)
     {
         _logger = logger;
         _dataContext = dataContext;

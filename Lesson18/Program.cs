@@ -22,7 +22,7 @@ builder.Services.AddControllersWithViews()
         options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
     });
 
-builder.Services.AddDbContext<IDataContext, EfDataContext>(options =>
+builder.Services.AddDbContext<ShopDbContext>(options =>
 {
     options.UseMySQL(connectionString);
 });

@@ -8,9 +8,9 @@ namespace Lesson18.Controllers;
 [Route("[controller]")]
 public class ProductController : ControllerBase
 {
-    private readonly IDataContext _context;
+    private readonly ShopDbContext _context;
 
-    public ProductController(IDataContext context)
+    public ProductController(ShopDbContext context)
     {
         _context = context;
     }

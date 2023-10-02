@@ -27,7 +27,7 @@
                     </li>
                 </ul>
             </div>
-                @if (!string.IsNullOrEmpty(ViewData["LoginButtonName"]?.ToString()))
+                @if (Convert.ToBoolean(ViewData["IsAuthenticated"]))
                 {
                     <div class="nav-item dropdown">
                         <div class="dropdown-toggle" id="loginButton" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
