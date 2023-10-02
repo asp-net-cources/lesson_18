@@ -73,4 +73,10 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    
+    [Authorize(Policy = "OnlyForAdults")]
+    public IActionResult Adult()
+    {
+        return Redirect("https://www.nalog.gov.ru/rn77/taxation/taxes/ndfl/nalog_vichet/primer_3ndfl/");
+    }
 }

@@ -15,9 +15,11 @@ public class User
     public string Login { get; set; }
     [StringLength(100)]
     public string Password { get; set; }
+
+    public DateTime DateOfBirth { get; set; }
+    
     [StringLength(100)]
     public string RoleStr { get; set; }
-
     [NotMapped]
     public UserRole Role
     {

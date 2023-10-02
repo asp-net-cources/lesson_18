@@ -38,6 +38,7 @@ public class AccountController : Controller
             {
                 new(ClaimTypes.Name, user.FirstName),
                 new(ClaimTypes.Surname, user.LastName),
+                new(ClaimTypes.DateOfBirth, user.DateOfBirth.ToShortDateString()),
                 new(ClaimTypes.Role, user.Role.Name)
             };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

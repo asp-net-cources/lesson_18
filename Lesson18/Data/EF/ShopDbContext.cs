@@ -102,6 +102,7 @@ public class ShopDbContext : DbContext {
                 LastName = "Главный",
                 Login = "admin",
                 Password = "Admin12+",
+                DateOfBirth = DateTime.Now.AddYears(-20),
                 Role = UserRole.Admin()
             });
         modelBuilder.Entity<User>()
@@ -112,6 +113,18 @@ public class ShopDbContext : DbContext {
                 LastName = "Обычный",
                 Login = "user",
                 Password = "User12+",
+                DateOfBirth = DateTime.Now.AddYears(-20),
+                Role = UserRole.Common()
+            });
+        modelBuilder.Entity<User>()
+            .HasData(new User
+            {
+                Id = new Guid("36c24de2-e210-4da6-8e2e-e3c1683110cf"),
+                FirstName = "Пользователь",
+                LastName = "Молодой",
+                Login = "user-junior",
+                Password = "User12+",
+                DateOfBirth = DateTime.Now.AddYears(-10),
                 Role = UserRole.Common()
             });
     }

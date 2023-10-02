@@ -3,7 +3,9 @@ using Lesson18.JsonSettings.Policies;
 using System.Text.Json.Serialization;
 using Lesson18.Data;
 using Lesson18.Data.EF;
+using Lesson18.Middlewares;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -33,6 +35,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/account/login";
         options.AccessDeniedPath = "/account/accessDenied";
     });
+builder.Services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("OnlyForAdults", policy =>
+    {
+        policy.Requirements.Add(new MinimumAgeRequirement(18));
+    });
+});
+builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
 builder.Services.AddSwaggerGen();
 
