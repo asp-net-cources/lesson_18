@@ -3,10 +3,12 @@ using Lesson18.Data.EF;
 using Lesson18.Models.Account;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lesson18.Controllers;
 
+[Authorize]
 public class AccountController : Controller
 {
     private readonly ShopDbContext _dbContext;
@@ -16,12 +18,14 @@ public class AccountController : Controller
         _dbContext = dbContext;
     }
     
+    [AllowAnonymous]
     [HttpGet]
     public ActionResult Login()
     {
         return View();
     }
     
+    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult> Login([FromForm]LoginInputModel input, [FromQuery]string? returnUrl)
     {
@@ -50,11 +54,8 @@ public class AccountController : Controller
     [HttpGet]
     public async Task<ActionResult> Logout()
     {
-        if (User.Identity?.IsAuthenticated == true)
-        {
-            await HttpContext.SignOutAsync();
-        }
+        await HttpContext.SignOutAsync();
 
-        return RedirectToAction(nameof(HomeController.Index), "Home");
+        return RedirectToAction(nameof(Login));
     }
 }

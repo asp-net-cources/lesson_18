@@ -3,11 +3,13 @@ using System.Diagnostics;
 using Lesson18.Data;
 using Lesson18.Models;
 using Lesson18.Data.EF;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Lesson18.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     public ShopDbContext _dataContext;
