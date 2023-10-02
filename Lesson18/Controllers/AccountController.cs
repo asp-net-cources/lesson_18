@@ -38,6 +38,7 @@ public class AccountController : Controller
             {
                 new(ClaimTypes.Name, user.FirstName),
                 new(ClaimTypes.Surname, user.LastName),
+                new(ClaimTypes.Role, user.Role.Name)
             };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
@@ -57,5 +58,11 @@ public class AccountController : Controller
         await HttpContext.SignOutAsync();
 
         return RedirectToAction(nameof(Login));
+    }
+    
+    [HttpGet]
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 }

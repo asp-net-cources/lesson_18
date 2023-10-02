@@ -1,0 +1,33 @@
+@model Lesson18.Models.Admin.UsersModel;
+@{
+    ViewData["Title"] = "Home Page";
+    var users = Model.Users;
+}
+
+<div class="text-center">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Логин</th>
+            <th scope="col">Роль</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < users.Length; i++)
+        {
+            <tr>
+                <td>
+                    <div>@users[i].FirstName</div></td>
+                <td>
+                    <div>@users[i].LastName</div></td>
+                <td>
+                    <div>@users[i].Login</div></td>
+                <td>
+                    <div>@users[i].Role.Name</div></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

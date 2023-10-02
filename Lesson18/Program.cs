@@ -28,7 +28,11 @@ builder.Services.AddDbContext<ShopDbContext>(options =>
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => options.LoginPath = "/account/login");
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/account/login";
+        options.AccessDeniedPath = "/account/accessDenied";
+    });
 
 builder.Services.AddSwaggerGen();
 

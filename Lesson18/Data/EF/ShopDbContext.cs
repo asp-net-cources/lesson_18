@@ -101,7 +101,18 @@ public class ShopDbContext : DbContext {
                 FirstName = "Админ",
                 LastName = "Главный",
                 Login = "admin",
-                Password = "Admin12+"
+                Password = "Admin12+",
+                Role = UserRole.Admin()
+            });
+        modelBuilder.Entity<User>()
+            .HasData(new User
+            {
+                Id = new Guid("cda15a3f-38ea-4049-8d99-091ae31cc783"),
+                FirstName = "Пользователь",
+                LastName = "Обычный",
+                Login = "user",
+                Password = "User12+",
+                Role = UserRole.Common()
             });
     }
 }
