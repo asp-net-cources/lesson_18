@@ -26,6 +26,8 @@ builder.Services.AddDbContext<IDataContext, EfDataContext>(options =>
     options.UseMySQL(connectionString);
 });
 
+builder.Services.AddAuthentication("Cookies");
+
 builder.Services.AddSwaggerGen();
 
 builder.Host.UseSerilog((context, configuration) =>
@@ -54,8 +56,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
 
+app.UseAuthentication();;
 app.UseAuthorization();
 
 app.MapControllerRoute(

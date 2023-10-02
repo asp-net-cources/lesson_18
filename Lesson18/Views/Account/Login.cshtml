@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Login page";
+    var errors = ViewData.ModelState.Values.SelectMany(v => v.Errors).ToArray();
+}
+
+<div class="text-center">
+    <h2>Вход</h2>
+    <form method="Post">
+        @if(errors.Any())
+        {
+            <p>
+                <ul>
+                    @foreach( var error in errors)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @error.ErrorMessage
+                        </div>
+                    }
+                </ul>
+            </p>
+        }
+        <p>
+            <label>Login</label><br/>
+            <input name='login' placeholder="Введите логин"/>
+        </p>
+        <p>
+            <label>Password</label><br/>
+            <input type='password' name='password' placeholder="Введите пароль"/>
+        </p>
+        <input type='submit' value='Login'/>
+    </form>
+</div>
