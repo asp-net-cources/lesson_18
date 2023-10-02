@@ -23,7 +23,7 @@ public class AccountController : Controller
     }
     
     [HttpPost]
-    public async Task<ActionResult> Login(LoginInputModel input)
+    public async Task<ActionResult> Login([FromForm]LoginInputModel input, [FromQuery]string? returnUrl)
     {
         var user = _dbContext.Users.FirstOrDefault(user =>
             string.Equals(user.Login, input.Login, StringComparison.OrdinalIgnoreCase)
@@ -39,11 +39,22 @@ public class AccountController : Controller
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-            
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+
+            return Redirect(returnUrl ?? "/");
         }
         
         ModelState.AddModelError("Unathorized", "Неверные логин или пароль");
         return View(ModelState);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> Logout()
+    {
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            await HttpContext.SignOutAsync();
+        }
+
+        return RedirectToAction(nameof(HomeController.Index), "Home");
     }
 }
