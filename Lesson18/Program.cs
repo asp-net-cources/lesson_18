@@ -3,6 +3,7 @@ using Lesson18.JsonSettings.Policies;
 using System.Text.Json.Serialization;
 using Lesson18.Data;
 using Lesson18.Data.EF;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -26,7 +27,8 @@ builder.Services.AddDbContext<IDataContext, EfDataContext>(options =>
     options.UseMySQL(connectionString);
 });
 
-builder.Services.AddAuthentication("Cookies");
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => options.LoginPath = "/account/login");
 
 builder.Services.AddSwaggerGen();
 

@@ -1,3 +1,5 @@
+@using System.Security.Claims
 @{
     Layout = "_Layout";
+    ViewData["LoginButtonName"] = $"{@User.Identity?.Name}";
 }
